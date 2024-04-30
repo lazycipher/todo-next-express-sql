@@ -127,7 +127,11 @@ const TodoList = () => {
           <IoIosAddCircleOutline size={20} />
         </button>
       </div>
-      <ul className="min-h-[25vh] flex flex-col items-center justify-start rounded-2xl shadow border bg-base-100">
+      <ul
+        className={`min-h-[25vh] flex flex-col items-center justify-start rounded-2xl shadow border bg-base-100 ${
+          todos.length === 0 && "justify-center"
+        }`}
+      >
         {todos.map((todo) => (
           <TodoListItem
             key={todo.id}
@@ -138,7 +142,15 @@ const TodoList = () => {
             handleMarkIncomplete={handleMarkIncomplete}
           />
         ))}
-        {todos.length === 0 && <li>No Todos Found</li>}
+        {todos.length === 0 && (
+          <li className="flex flex-col gap-4 items-center justify-center font-bold">
+            No Todos Found
+            <button className="btn btn-primary" onClick={handleAddTodoClick}>
+              Create New
+              <IoIosAddCircleOutline size={20} />
+            </button>
+          </li>
+        )}
       </ul>
       {showEditModal && (
         <EditTodoModal
